@@ -31,7 +31,7 @@ class StationsViewModel @Inject constructor(
             when (result) {
                 is Response.Success -> {
                     uiState = uiState.copy(
-                        trainStationDtos = result.data?.stationDtos,
+                        trainStations = result.data?.stationDtos,
                         isLoading = false,
                         error = null
                     )
@@ -39,7 +39,7 @@ class StationsViewModel @Inject constructor(
 
                 is Response.Error -> {
                     uiState = uiState.copy(
-                        trainStationDtos = null,
+                        trainStations = null,
                         error = "API response error",
                         isLoading = false
                     )
@@ -52,5 +52,5 @@ class StationsViewModel @Inject constructor(
 data class StationsUIState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    var trainStationDtos: List<StationDto>? = listOf()
+    var trainStations: List<StationDto>? = listOf()
 )
