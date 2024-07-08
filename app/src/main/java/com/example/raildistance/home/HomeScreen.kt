@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.raildistance.R
 import com.example.raildistance.composable.ChangeSystemBarColor
+import com.example.raildistance.composable.InputFieldType
 import com.example.raildistance.composable.LoadingScreen
 import com.example.raildistance.composable.SearchInputField
 import com.example.raildistance.stations.StationsUIState
@@ -87,13 +88,15 @@ fun HomeScreenContent(uiState: StationsUIState) {
                 Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXXL))
                 SearchInputField(
                     text = "Warszawa Centralna",
-                    leadingIcon = R.drawable.ic_start_destination
+                    leadingIcon = R.drawable.ic_start_destination,
+                    inputFieldType = InputFieldType.Disabled
                 )
                 Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
                 SearchInputField(
                     text = "Krakow",
                     leadingIcon = R.drawable.ic_end_destination,
-                    trailingIcon = R.drawable.ic_arrows_up_down
+                    trailingIcon = R.drawable.ic_arrows_up_down,
+                    inputFieldType = InputFieldType.Disabled
                 )
                 Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
             }
