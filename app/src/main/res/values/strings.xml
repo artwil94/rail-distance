@@ -2,4 +2,9 @@
     <string name="app_name">RailDistance</string>
 
     <string name="koleo">Koleo</string>
+    <string name="home">Home</string>
+    <string name="account">Account</string>
+    <string name="stations">Stations</string>
+
+    <string name="content_description_home_screen">Home Screen</string>
 </resources>

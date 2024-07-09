@@ -26,18 +26,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.example.raildistance.R
 import com.example.raildistance.composable.ActionButton
 import com.example.raildistance.composable.ChangeSystemBarColor
 import com.example.raildistance.composable.InputFieldType
 import com.example.raildistance.composable.LoadingScreen
 import com.example.raildistance.composable.SearchInputField
+import com.example.raildistance.navigation.BottomBar
 import com.example.raildistance.stations.StationsUIState
 import com.example.raildistance.stations.StationsViewModel
 import com.example.raildistance.ui.theme.KoTheme
 
 @Composable
-fun HomeScreen(viewModel: StationsViewModel = hiltViewModel()) {
+fun HomeScreen(navController: NavHostController,viewModel: StationsViewModel = hiltViewModel()) {
     LaunchedEffect(key1 = Unit) {
         viewModel.getTrainStations()
     }
@@ -45,6 +47,7 @@ fun HomeScreen(viewModel: StationsViewModel = hiltViewModel()) {
         modifier = Modifier
             .fillMaxSize()
             .windowInsetsPadding(WindowInsets.navigationBars),
+        bottomBar = { BottomBar(navController = navController) }
     ) { innerPadding ->
         ChangeSystemBarColor(statusBarColor = KoTheme.kOColors.screenHeader)
         Box(
@@ -56,7 +59,6 @@ fun HomeScreen(viewModel: StationsViewModel = hiltViewModel()) {
         ) {
             HomeScreenContent(uiState = viewModel.uiState)
         }
-
     }
 }
 
