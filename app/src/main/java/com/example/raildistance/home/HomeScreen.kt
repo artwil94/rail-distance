@@ -27,6 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.raildistance.R
+import com.example.raildistance.composable.ActionButton
 import com.example.raildistance.composable.ChangeSystemBarColor
 import com.example.raildistance.composable.InputFieldType
 import com.example.raildistance.composable.LoadingScreen
@@ -98,7 +99,15 @@ fun HomeScreenContent(uiState: StationsUIState) {
                     trailingIcon = R.drawable.ic_arrows_up_down,
                     inputFieldType = InputFieldType.Disabled
                 )
-                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
+                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingSeparator))
+                ActionButton(
+                    text = "Calculate distance",
+                    onClick = {},
+                    modifier = Modifier.fillMaxWidth(),
+                    inverted = true,
+                    trailingIcon = R.drawable.ic_distance_between
+                )
+                Spacer(modifier = Modifier.height(KoTheme.kODimensions.padding))
             }
         }
         if (uiState.isLoading) {

@@ -147,7 +147,21 @@ fun RailDistanceTheme(
             fontFamily = KoTheme.fonts.freigeistMedium,
             fontWeight = FontWeight(550),
             color = Color.White,
-        )
+        ),
+        val actionButton: TextStyle = TextStyle(
+            fontSize = 16.sp,
+            lineHeight = 22.sp,
+            fontFamily = KoTheme.fonts.freigeistMedium,
+            fontWeight = FontWeight(550),
+            color = Color(0xFF333333),
+        ),
+        val actionButtonWhite: TextStyle = TextStyle(
+            fontSize = 16.sp,
+            lineHeight = 22.sp,
+            fontFamily = KoTheme.fonts.freigeistMedium,
+            fontWeight = FontWeight(550),
+            color = Color.White,
+        ),
     )
 
     data class Fonts(
@@ -174,6 +188,7 @@ fun RailDistanceTheme(
         val paddingMedium: Dp = 20.dp,
         val paddingXL: Dp = 24.dp,
         val paddingXXL: Dp = 30.dp,
+        val paddingSeparator: Dp = 50.dp,
         val screenHeaderHeight: Dp = 120.dp,
         val tabsHeight: Dp = 42.dp,
         val icon: Dp = 24.dp,
@@ -186,5 +201,5 @@ fun RailDistanceTheme(
         val screenHeader: Color = Color(0xFF1A237E),
         val selectedItem: Color = Color(0xFF4DB6AC),
         val surfaceBrand: Color = Color(0xFF00695C),
-        val actionButton: Color = Color(0xFF8BC34A),
+        val actionButton: Color = Color(0xFFEC407A),
     )
