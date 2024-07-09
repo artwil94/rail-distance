@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.raildistance.R
 import com.example.raildistance.data.remote.StationDto
 import com.example.raildistance.ui.theme.KoTheme
@@ -36,7 +37,7 @@ fun StationItem(station: StationDto, onClick: (StationDto) -> Unit = {}) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            modifier = Modifier.size(KoTheme.kODimensions.icon),
+            modifier = Modifier.size(20.dp),
             painter = painterResource(id = R.drawable.ic_location),
             contentDescription = stringResource(id = R.string.station),
             tint = Color.Unspecified

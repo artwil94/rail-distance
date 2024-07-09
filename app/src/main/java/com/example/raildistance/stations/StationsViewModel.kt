@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.raildistance.data.remote.StationDto
+import com.example.raildistance.data.remote.StationKeywordsDto
 import com.example.raildistance.domain.repository.TrainStationsRepository
 import com.example.raildistance.util.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,14 +28,39 @@ class StationsViewModel @Inject constructor(
                 isLoading = true
             )
             val result = repository.getTrainStations()
-            Timber.d("ARTURO ${result.message}")
+            Timber.d("ARTUR ${result.message}")
             when (result) {
                 is Response.Success -> {
                     uiState = uiState.copy(
-                        trainStations = result.data?.stationDtos,
+                        trainStations = result.data?.stations,
                         isLoading = false,
                         error = null
                     )
+                }
+
+                is Response.Error -> {
+                    uiState = uiState.copy(
+                        trainStations = null,
+                        error = "API response error",
+                        isLoading = false
+                    )
+                }
+            }
+        }
+    }
+    fun getStationKeywords() {
+        viewModelScope.launch {
+            uiState = uiState.copy(
+                isLoading = true
+            )
+            when (val result = repository.getStationKeywords()) {
+                is Response.Success -> {
+                    uiState = uiState.copy(
+                        keywords = result.data?.keywords,
+                        isLoading = false,
+                        error = null
+                    )
+                    Timber.d("ARTUR $result")
                 }
 
                 is Response.Error -> {
@@ -52,5 +78,6 @@ class StationsViewModel @Inject constructor(
 data class StationsUIState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    var trainStations: List<StationDto>? = listOf()
+    var trainStations: List<StationDto>? = listOf(),
+    var keywords: List<StationKeywordsDto>? = listOf()
 )
