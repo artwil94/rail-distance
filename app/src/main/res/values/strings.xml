@@ -5,6 +5,7 @@
     <string name="home">Home</string>
     <string name="account">Account</string>
     <string name="stations">Stations</string>
+    <string name="station">Station</string>
 
     <string name="content_description_home_screen">Home Screen</string>
 </resources>
