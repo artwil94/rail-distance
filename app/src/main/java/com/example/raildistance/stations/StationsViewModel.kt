@@ -91,11 +91,9 @@ class /**/ StationsViewModel @Inject constructor(
         }
     }
 
-    fun clearInputs() {
+    fun resetDistanceCalculator() {
         viewModelScope.launch {
             uiState = uiState.copy(
-                firstStation = null,
-                secondStation = null,
                 distance = null
             )
         }

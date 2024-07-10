@@ -10,7 +10,7 @@
     <string name="results">Results</string>
     <string name="enter_station_name">Enter station name</string>
     <string name="distance">Distance</string>
-    <string name="km">Km</string>
+    <string name="km">%s km</string>
     <string name="clear">Clear</string>
 
     <string name="content_description_home_screen">Home Screen</string>

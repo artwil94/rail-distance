@@ -46,6 +46,10 @@ fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = 
         viewModel.getTrainStations()
         viewModel.getStationKeywords()
     }
+    LaunchedEffect(key1 = uiState.firstStation, key2 = uiState.secondStation) {
+        viewModel.resetDistanceCalculator()
+    }
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -150,7 +154,7 @@ fun HomeScreenContent(
                         .align(Alignment.End)
                         .padding(end = KoTheme.kODimensions.padding)
                         .clickable {
-                            viewModel.clearInputs()
+                            viewModel.resetDistanceCalculator()
                         },
                     text = stringResource(id = R.string.clear),
                     style = KoTheme.kOTypography.clearCTA,
@@ -162,7 +166,7 @@ fun HomeScreenContent(
                 )
                 Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingS))
                 Text(
-                    text = uiState.distance.toString(),
+                    text = stringResource(id = R.string.km, uiState.distance.toString()),
                     style = KoTheme.kOTypography.stationName
                 )
                 Row(
