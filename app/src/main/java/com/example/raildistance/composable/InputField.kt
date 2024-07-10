@@ -27,10 +27,12 @@ fun SearchInputField(
     onClick: () -> Unit = {},
     @DrawableRes trailingIcon: Int? = null,
     @DrawableRes leadingIcon: Int? = null,
-    placeHolder: String? = null
+    placeHolder: String? = null,
+    modifier: Modifier = Modifier
 ) {
     TextField(
         modifier = Modifier
+            .then(modifier)
             .fillMaxWidth()
             .clip(shape = KoTheme.kOShapes.inputField)
             .border(width = 0.dp, color = Color.Black, shape = KoTheme.kOShapes.inputField)

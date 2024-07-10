@@ -7,4 +7,8 @@ interface TrainStationsApi {
     @GET("api/v2/main/stations")
     @Headers("X-KOLEO-Version: 1")
     suspend fun getStations(): List<StationDto>
+
+    @GET("api/v2/main/station_keywords")
+    @Headers("X-KOLEO-Version: 1")
+    suspend fun getStationKeyWords(): List<StationKeywordDto>
 }
