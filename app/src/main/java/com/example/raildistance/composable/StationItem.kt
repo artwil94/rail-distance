@@ -20,11 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.raildistance.R
-import com.example.raildistance.data.remote.StationDto
+import com.example.raildistance.domain.model.TrainStation
 import com.example.raildistance.ui.theme.KoTheme
 
 @Composable
-fun StationItem(station: StationDto, onClick: (StationDto) -> Unit = {}) {
+fun StationItem(station: TrainStation, onClick: (TrainStation) -> Unit = {}) {
     Row(
         modifier = Modifier
             .clickable { onClick.invoke(station) }
@@ -45,7 +45,7 @@ fun StationItem(station: StationDto, onClick: (StationDto) -> Unit = {}) {
         Spacer(modifier = Modifier.width(KoTheme.kODimensions.padding))
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = station.name ?: "",
+                text = station.name,
                 style = KoTheme.kOTypography.stationName
             )
             Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXs))
@@ -69,11 +69,14 @@ fun StationItem(station: StationDto, onClick: (StationDto) -> Unit = {}) {
 @Composable
 fun StationItemPreview() {
     StationItem(
-        station = StationDto(
+        station = TrainStation(
             name = "Warszawa Centralna",
             city = "Warszawa",
             region = "mazowieckie",
-            country = "Poland"
+            country = "Poland",
+            id = 1,
+            latitude = 0.0,
+            longitude = 0.0
         )
     )
 }

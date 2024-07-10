@@ -1,6 +1,5 @@
 package com.example.raildistance.di
 
-import android.app.Application
 import com.example.raildistance.data.remote.TrainStationsApi
 import com.example.raildistance.domain.repository.TrainStationsRepository
 import com.example.raildistance.domain.repository.TrainStationsRepositoryImpl
@@ -23,11 +22,11 @@ object TrainStationAppModule {
     @Singleton
     fun provideTrainStationsApi(): TrainStationsApi {
 
-        val intercepter = HttpLoggingInterceptor()
-        intercepter.level = HttpLoggingInterceptor.Level.BODY
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val client = OkHttpClient.Builder().apply {
-            this.addInterceptor(intercepter)
+            this.addInterceptor(interceptor)
         }.build()
 
         return Retrofit.Builder()

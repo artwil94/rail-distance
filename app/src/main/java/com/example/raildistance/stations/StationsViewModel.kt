@@ -5,8 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.raildistance.data.remote.StationDto
-import com.example.raildistance.data.remote.StationKeywordsDto
+import com.example.raildistance.domain.model.StationKeyword
+import com.example.raildistance.domain.model.TrainStation
 import com.example.raildistance.domain.repository.TrainStationsRepository
 import com.example.raildistance.util.Response
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -32,7 +32,7 @@ class StationsViewModel @Inject constructor(
             when (result) {
                 is Response.Success -> {
                     uiState = uiState.copy(
-                        trainStations = result.data?.stations,
+                        trainStations = result.data,
                         isLoading = false,
                         error = null
                     )
@@ -56,7 +56,7 @@ class StationsViewModel @Inject constructor(
             when (val result = repository.getStationKeywords()) {
                 is Response.Success -> {
                     uiState = uiState.copy(
-                        keywords = result.data?.keywords,
+                        keywords = result.data,
                         isLoading = false,
                         error = null
                     )
@@ -65,7 +65,7 @@ class StationsViewModel @Inject constructor(
 
                 is Response.Error -> {
                     uiState = uiState.copy(
-                        trainStations = null,
+                        keywords = null,
                         error = "API response error",
                         isLoading = false
                     )
@@ -78,6 +78,6 @@ class StationsViewModel @Inject constructor(
 data class StationsUIState(
     val isLoading: Boolean = true,
     val error: String? = null,
-    var trainStations: List<StationDto>? = listOf(),
-    var keywords: List<StationKeywordsDto>? = listOf()
+    var trainStations: List<TrainStation>? = listOf(),
+    var keywords: List<StationKeyword>? = listOf()
 )

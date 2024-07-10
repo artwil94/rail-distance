@@ -35,7 +35,6 @@ import com.example.raildistance.composable.ChangeSystemBarColor
 import com.example.raildistance.composable.InputFieldType
 import com.example.raildistance.composable.LoadingScreen
 import com.example.raildistance.composable.SearchInputField
-import com.example.raildistance.composable.StationItem
 import com.example.raildistance.data.remote.StationDto
 import com.example.raildistance.navigation.BottomBar
 import com.example.raildistance.stations.StationsUIState
@@ -46,6 +45,7 @@ import com.example.raildistance.ui.theme.KoTheme
 fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = hiltViewModel()) {
     LaunchedEffect(key1 = Unit) {
         viewModel.getTrainStations()
+        viewModel.getStationKeywords()
     }
     Scaffold(
         modifier = Modifier
@@ -129,13 +129,11 @@ fun HomeScreenContent(uiState: StationsUIState) {
                     modifier = Modifier
                         .fillMaxSize()
                 ) {
-                    uiState.trainStations?.let { stations ->
-                        val limitedStations = stations.take(4)
+                    uiState.keywords?.let { keywords ->
+                        val limitedStations = keywords.take(4)
                         items(limitedStations.size) { index ->
-                            val station = limitedStations[index]
-                            StationItem(
-                                station = station,
-                                onClick = { firstStation.value = station })
+                            val keyword = limitedStations[index]
+                            Text(text = keyword.keyword)
                         }
                     }
                 }
