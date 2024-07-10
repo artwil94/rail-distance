@@ -36,7 +36,7 @@ fun SearchInputField(
             .fillMaxWidth()
             .clip(shape = KoTheme.kOShapes.inputField)
             .border(width = 0.dp, color = Color.Black, shape = KoTheme.kOShapes.inputField)
-            .height(50.dp)
+            .height(KoTheme.kODimensions.inputFieldHeight)
             .clickable {
                 if (inputFieldType == InputFieldType.Disabled) {
                     onClick.invoke()

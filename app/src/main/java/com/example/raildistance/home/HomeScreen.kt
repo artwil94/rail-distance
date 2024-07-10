@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -31,16 +31,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.raildistance.R
 import com.example.raildistance.composable.ActionButton
+import com.example.raildistance.composable.AutoCompleteSearchBar
 import com.example.raildistance.composable.ChangeSystemBarColor
-import com.example.raildistance.composable.InputFieldType
-import com.example.raildistance.composable.LoadingScreen
-import com.example.raildistance.composable.SearchInputField
-import com.example.raildistance.data.remote.StationDto
+import com.example.raildistance.domain.model.TrainStation
 import com.example.raildistance.navigation.BottomBar
 import com.example.raildistance.stations.StationsUIState
 import com.example.raildistance.stations.StationsViewModel
 import com.example.raildistance.ui.theme.KoTheme
 
+@ExperimentalMaterial3Api
 @Composable
 fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = hiltViewModel()) {
     LaunchedEffect(key1 = Unit) {
@@ -66,13 +65,13 @@ fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = 
     }
 }
 
+@ExperimentalMaterial3Api
 @Composable
 fun HomeScreenContent(uiState: StationsUIState) {
-    val trainStations = uiState.trainStations ?: emptyList()
     val firstStation =
-        remember { mutableStateOf<StationDto?>(null) }
+        remember { mutableStateOf<TrainStation?>(null) }
     val secondStation =
-        remember { mutableStateOf<StationDto?>(null) }
+        remember { mutableStateOf<TrainStation?>(null) }
     Column(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier.fillMaxSize()) {
             Box(
@@ -99,17 +98,26 @@ fun HomeScreenContent(uiState: StationsUIState) {
                         )
                     }
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXXL))
-                    SearchInputField(
-                        text = firstStation.value?.name ?: "",
+                    AutoCompleteSearchBar(
+                        keywords = uiState.keywords ?: emptyList(),
+                        stations = uiState.trainStations ?: emptyList(),
                         leadingIcon = R.drawable.ic_start_destination,
-                        inputFieldType = InputFieldType.Disabled
+                        trailingIcon = R.drawable.ic_close,
+                        placeholder = stringResource(id = R.string.enter_station_name),
+                        onItemClick = { trainStation ->
+                            firstStation.value = trainStation
+                        }
                     )
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
-                    SearchInputField(
-                        text = secondStation.value?.name ?: "",
+                    AutoCompleteSearchBar(
+                        keywords = uiState.keywords ?: emptyList(),
+                        stations = uiState.trainStations ?: emptyList(),
                         leadingIcon = R.drawable.ic_end_destination,
-                        trailingIcon = R.drawable.ic_arrows_up_down,
-                        inputFieldType = InputFieldType.Disabled
+                        trailingIcon = R.drawable.ic_close,
+                        placeholder = stringResource(id = R.string.enter_station_name),
+                        onItemClick = { trainStation ->
+                            secondStation.value = trainStation
+                        }
                     )
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingSeparator))
                     ActionButton(
@@ -120,22 +128,6 @@ fun HomeScreenContent(uiState: StationsUIState) {
                         trailingIcon = R.drawable.ic_distance_between
                     )
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.padding))
-                }
-            }
-            if (uiState.isLoading) {
-                LoadingScreen()
-            } else {
-                LazyColumn(
-                    modifier = Modifier
-                        .fillMaxSize()
-                ) {
-                    uiState.keywords?.let { keywords ->
-                        val limitedStations = keywords.take(4)
-                        items(limitedStations.size) { index ->
-                            val keyword = limitedStations[index]
-                            Text(text = keyword.keyword)
-                        }
-                    }
                 }
             }
         }

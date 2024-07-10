@@ -8,6 +8,7 @@
     <string name="stations">Stations</string>
     <string name="station">Station</string>
     <string name="results">Results</string>
+    <string name="enter_station_name">Enter station name</string>
 
     <string name="content_description_home_screen">Home Screen</string>
     <string name="content_description_close_station_searching">Close station searching</string>

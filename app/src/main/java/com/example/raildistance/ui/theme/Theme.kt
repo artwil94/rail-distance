@@ -179,6 +179,15 @@ data class KoTypography(
         color = Color(0xFF333333),
         textAlign = TextAlign.Center,
     ),
+    val searchBarPlaceHolder: TextStyle =TextStyle(
+        fontSize = 16.sp,
+        fontFamily = KoTheme.fonts.robotoLight,
+        fontWeight = FontWeight(300),
+        color = Color(0xFF6B687A),
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        ),
+    ),
 )
 
 data class Fonts(
@@ -206,9 +215,11 @@ data class KoDimensions(
     val paddingXL: Dp = 24.dp,
     val paddingXXL: Dp = 30.dp,
     val paddingSeparator: Dp = 50.dp,
+    val inputFieldHeight: Dp = 50.dp,
     val screenHeaderHeight: Dp = 120.dp,
     val tabsHeight: Dp = 42.dp,
     val icon: Dp = 24.dp,
+    val searchBarCloseIcon: Dp = 20.dp,
 )
 
 data class KoColors(
