@@ -1,5 +1,6 @@
 package com.example.raildistance.stations
 
+import android.location.Location
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -15,7 +16,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class StationsViewModel @Inject constructor(
+class /**/ StationsViewModel @Inject constructor(
     private val repository: TrainStationsRepository,
 ) : ViewModel() {
 
@@ -48,6 +49,7 @@ class StationsViewModel @Inject constructor(
             }
         }
     }
+
     fun getStationKeywords() {
         viewModelScope.launch {
             uiState = uiState.copy(
@@ -60,7 +62,6 @@ class StationsViewModel @Inject constructor(
                         isLoading = false,
                         error = null
                     )
-                    Timber.d("ARTUR $result")
                 }
 
                 is Response.Error -> {
@@ -73,11 +74,59 @@ class StationsViewModel @Inject constructor(
             }
         }
     }
+
+    fun onFirstStationSelect(station: TrainStation) {
+        viewModelScope.launch {
+            uiState = uiState.copy(
+                firstStation = station
+            )
+        }
+    }
+
+    fun onSecondStationSelect(station: TrainStation) {
+        viewModelScope.launch {
+            uiState = uiState.copy(
+                secondStation = station
+            )
+        }
+    }
+
+    fun clearInputs() {
+        viewModelScope.launch {
+            uiState = uiState.copy(
+                firstStation = null,
+                secondStation = null,
+                distance = null
+            )
+        }
+    }
+
+    fun calculateDistance(firstStation: TrainStation, secondStation: TrainStation) {
+        viewModelScope.launch {
+            val locationA = Location("point A").apply {
+                latitude = firstStation.latitude
+                longitude = firstStation.longitude
+            }
+            val locationB = Location("point B").apply {
+                latitude = secondStation.latitude
+                longitude = secondStation.longitude
+            }
+            val distance = locationA.distanceTo(locationB) / 1000
+            val formattedDistance = String.format("%.2f", distance)
+            Timber.d("ARTURW $formattedDistance")
+            uiState = uiState.copy(
+                distance = formattedDistance
+            )
+        }
+    }
 }
 
 data class StationsUIState(
     val isLoading: Boolean = true,
     val error: String? = null,
     var trainStations: List<TrainStation>? = listOf(),
-    var keywords: List<StationKeyword>? = listOf()
+    var keywords: List<StationKeyword>? = listOf(),
+    var firstStation: TrainStation? = null,
+    var secondStation: TrainStation? = null,
+    var distance: String? = null
 )

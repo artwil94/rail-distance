@@ -1,6 +1,7 @@
 package com.example.raildistance.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,13 +20,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -33,7 +33,6 @@ import com.example.raildistance.R
 import com.example.raildistance.composable.ActionButton
 import com.example.raildistance.composable.AutoCompleteSearchBar
 import com.example.raildistance.composable.ChangeSystemBarColor
-import com.example.raildistance.domain.model.TrainStation
 import com.example.raildistance.navigation.BottomBar
 import com.example.raildistance.stations.StationsUIState
 import com.example.raildistance.stations.StationsViewModel
@@ -42,6 +41,7 @@ import com.example.raildistance.ui.theme.KoTheme
 @ExperimentalMaterial3Api
 @Composable
 fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = hiltViewModel()) {
+    val uiState = viewModel.uiState
     LaunchedEffect(key1 = Unit) {
         viewModel.getTrainStations()
         viewModel.getStationKeywords()
@@ -54,26 +54,37 @@ fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = 
     ) { innerPadding ->
         ChangeSystemBarColor(statusBarColor = KoTheme.kOColors.screenHeader)
         Box(
-
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
             contentAlignment = Alignment.Center
         ) {
-            HomeScreenContent(uiState = viewModel.uiState)
+            HomeScreenContent(
+                uiState = viewModel.uiState,
+                onCalculateDistance = {
+                    if (uiState.firstStation != null && uiState.secondStation != null) {
+                        viewModel.calculateDistance(
+                            firstStation = viewModel.uiState.firstStation!!,
+                            secondStation = viewModel.uiState.secondStation!!
+                        )
+                    }
+                })
         }
     }
 }
 
 @ExperimentalMaterial3Api
 @Composable
-fun HomeScreenContent(uiState: StationsUIState) {
-    val firstStation =
-        remember { mutableStateOf<TrainStation?>(null) }
-    val secondStation =
-        remember { mutableStateOf<TrainStation?>(null) }
+fun HomeScreenContent(
+    uiState: StationsUIState,
+    viewModel: StationsViewModel = hiltViewModel(),
+    onCalculateDistance: () -> Unit = {},
+) {
     Column(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -105,7 +116,7 @@ fun HomeScreenContent(uiState: StationsUIState) {
                         trailingIcon = R.drawable.ic_close,
                         placeholder = stringResource(id = R.string.enter_station_name),
                         onItemClick = { trainStation ->
-                            firstStation.value = trainStation
+                            viewModel.onFirstStationSelect(trainStation)
                         }
                     )
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
@@ -116,18 +127,68 @@ fun HomeScreenContent(uiState: StationsUIState) {
                         trailingIcon = R.drawable.ic_close,
                         placeholder = stringResource(id = R.string.enter_station_name),
                         onItemClick = { trainStation ->
-                            secondStation.value = trainStation
+                            viewModel.onSecondStationSelect(trainStation)
                         }
                     )
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingSeparator))
                     ActionButton(
                         text = "Calculate distance",
-                        onClick = {},
+                        onClick = {
+                            onCalculateDistance.invoke()
+                        },
                         modifier = Modifier.fillMaxWidth(),
                         inverted = true,
                         trailingIcon = R.drawable.ic_distance_between
                     )
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.padding))
+                }
+            }
+            if (uiState.distance.isNullOrBlank().not()) {
+                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingSeparator))
+                Text(
+                    modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(end = KoTheme.kODimensions.padding)
+                        .clickable {
+                            viewModel.clearInputs()
+                        },
+                    text = stringResource(id = R.string.clear),
+                    style = KoTheme.kOTypography.clearCTA,
+                    textDecoration = TextDecoration.Underline
+                )
+                Text(
+                    text = stringResource(id = R.string.distance),
+                    style = KoTheme.kOTypography.distance
+                )
+                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingS))
+                Text(
+                    text = uiState.distance.toString(),
+                    style = KoTheme.kOTypography.stationName
+                )
+                Row(
+                    modifier = Modifier
+                        .padding(KoTheme.kODimensions.padding)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        modifier = Modifier.weight(1f),
+                        text = uiState.firstStation?.name ?: "",
+                        style = KoTheme.kOTypography.stationName
+                    )
+                    Icon(
+                        modifier = Modifier.weight(1f),
+                        painter = painterResource(id = R.drawable.ic_distance_between),
+                        contentDescription = stringResource(
+                            id = R.string.distance
+                        ),
+                        tint = Color.Red
+                    )
+                    Text(
+                        modifier = Modifier.weight(1f),
+                        text = uiState.secondStation?.name ?: "",
+                        style = KoTheme.kOTypography.stationName
+                    )
                 }
             }
         }

@@ -113,6 +113,13 @@ data class KoTypography(
         color = Color(0xFF696878),
         fontFamily = KoTheme.fonts.robotoLight
     ),
+    val clearCTA: TextStyle = TextStyle(
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        fontWeight = FontWeight(700),
+        color = Color(0xFF333333),
+        fontFamily = KoTheme.fonts.robotoBold
+    ),
     val toolbar: TextStyle = TextStyle(
         fontSize = 24.sp,
         lineHeight = 28.sp,
@@ -179,7 +186,7 @@ data class KoTypography(
         color = Color(0xFF333333),
         textAlign = TextAlign.Center,
     ),
-    val searchBarPlaceHolder: TextStyle =TextStyle(
+    val searchBarPlaceHolder: TextStyle = TextStyle(
         fontSize = 16.sp,
         fontFamily = KoTheme.fonts.robotoLight,
         fontWeight = FontWeight(300),
@@ -187,6 +194,13 @@ data class KoTypography(
         platformStyle = PlatformTextStyle(
             includeFontPadding = false
         ),
+    ),
+    val distance: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        lineHeight = 24.sp,
+        fontFamily = KoTheme.fonts.freigeistMedium,
+        fontWeight = FontWeight(550),
+        color = Color(0xFF333333),
     ),
 )
 
