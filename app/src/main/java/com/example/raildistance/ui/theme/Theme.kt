@@ -202,6 +202,13 @@ data class KoTypography(
         fontWeight = FontWeight(550),
         color = Color(0xFF333333),
     ),
+    val close: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        lineHeight = 24.sp,
+        fontFamily = KoTheme.fonts.freigeistMedium,
+        fontWeight = FontWeight(550),
+        color = Color.White,
+    ),
 )
 
 data class Fonts(

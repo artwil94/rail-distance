@@ -24,7 +24,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -44,21 +43,20 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
-import com.example.raildistance.domain.model.StationKeyword
 import com.example.raildistance.domain.model.TrainStation
 import com.example.raildistance.ui.theme.KoTheme
-import com.example.raildistance.utils.Constants.MIN_INPUT_LENGTH_TO_AUTOCOMPLETE
-import timber.log.Timber
 
 @ExperimentalMaterial3Api
 @Composable
 fun AutoCompleteSearchBar(
-    keywords: List<StationKeyword>,
-    stations: List<TrainStation>,
+    modifier: Modifier = Modifier,
+    items: List<TrainStation>,
     @DrawableRes trailingIcon: Int? = null,
     @DrawableRes leadingIcon: Int? = null,
     placeholder: String? = null,
-    onItemClick: (TrainStation) -> Unit = {}
+    onItemClick: (TrainStation) -> Unit = {},
+    onValueChange: (String) -> Unit,
+    searchBarType: SearchBarType = SearchBarType.DropdownList,
 ) {
     var input by remember { mutableStateOf("") }
     val heightTextFields by remember { mutableStateOf(55.dp) }
@@ -70,7 +68,7 @@ fun AutoCompleteSearchBar(
     val keyboardController = LocalSoftwareKeyboardController.current
     Column(
         modifier = Modifier
-            .fillMaxWidth()
+            .then(modifier)
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
@@ -81,7 +79,7 @@ fun AutoCompleteSearchBar(
     ) {
         TextField(
             modifier = Modifier
-                .fillMaxWidth()
+                .then(modifier)
                 .height(heightTextFields)
                 .onGloballyPositioned { coordinates ->
                     textFieldSize = coordinates.size.toSize()
@@ -94,6 +92,7 @@ fun AutoCompleteSearchBar(
             onValueChange = {
                 input = it
                 expanded = true
+                onValueChange.invoke(it)
             },
             placeholder = {
                 if (placeholder != null) {
@@ -148,34 +147,42 @@ fun AutoCompleteSearchBar(
                 }
             }
         )
-        AnimatedVisibility(visible = expanded) {
-            Card(
-                modifier = Modifier
-                    .padding(horizontal = 5.dp)
-                    .width(textFieldSize.width.dp),
-                shape = RoundedCornerShape(10.dp)
+        if (searchBarType == SearchBarType.DropdownList) {
+            DropdownItemList(
+                items = items,
+                expanded = expanded,
+                modifier = Modifier.width(textFieldSize.width.dp),
+                onItemClick = { station ->
+                    input = station.name
+                    onItemClick.invoke(station)
+                    focusManager.clearFocus()
+                    expanded = false
+                })
+        }
+    }
+}
+
+@Composable
+fun DropdownItemList(
+    items: List<TrainStation>,
+    expanded: Boolean,
+    modifier: Modifier = Modifier,
+    onItemClick: (TrainStation) -> Unit
+) {
+    AnimatedVisibility(visible = expanded) {
+        Card(
+            modifier = Modifier
+                .padding(horizontal = 5.dp)
+                .then(modifier),
+            shape = RoundedCornerShape(10.dp)
+        ) {
+            LazyColumn(
+                modifier = Modifier.heightIn(max = 150.dp),
             ) {
-                LazyColumn(
-                    modifier = Modifier.heightIn(max = 150.dp),
-                ) {
-                    if (input.isNotEmpty() && input.length >= MIN_INPUT_LENGTH_TO_AUTOCOMPLETE) {
-                        val filteredKeywords = keywords.filter {
-                            it.keyword.lowercase().contains(input.lowercase())
-                        }
-                        val matchingStationIDs = filteredKeywords.map { it.stationId }
-                        val filteredStations = stations.filter {
-                            matchingStationIDs.contains(it.id)
-                        }.sortedByDescending { it.hits }
-                        Timber.d("ARTURW $filteredStations")
-                        items(filteredStations)
-                        { trainStation ->
-                            SearchItem(title = trainStation.name) { title ->
-                                input = title
-                                expanded = false
-                                onItemClick.invoke(trainStation)
-                                focusManager.clearFocus()
-                            }
-                        }
+                items(items)
+                { trainStation ->
+                    SearchItem(title = trainStation.name) { title ->
+                        onItemClick.invoke(trainStation)
                     }
                 }
             }
@@ -198,4 +205,9 @@ fun SearchItem(
     ) {
         Text(text = title, fontSize = 16.sp)
     }
+}
+
+enum class SearchBarType {
+    DropdownList,
+    WithoutContent
 }

@@ -10,6 +10,7 @@ import com.example.raildistance.domain.model.StationKeyword
 import com.example.raildistance.domain.model.TrainStation
 import com.example.raildistance.domain.repository.TrainStationsRepository
 import com.example.raildistance.util.Response
+import com.example.raildistance.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -75,6 +76,35 @@ class /**/ StationsViewModel @Inject constructor(
         }
     }
 
+    fun filterStations(input: String) {
+        viewModelScope.launch {
+            if (uiState.trainStations != null && uiState.keywords != null) {
+                val keywords = uiState.keywords!!
+                val stations = uiState.trainStations!!
+                if (input.length >= Constants.MIN_INPUT_LENGTH_TO_AUTOCOMPLETE) {
+                    val filteredKeywords = keywords.filter {
+                        it.keyword.lowercase().contains(input.lowercase())
+                    }
+                    val matchingStationIDs = filteredKeywords.map { it.stationId }.toSet()
+                    val result = stations.filter {
+                        matchingStationIDs.contains(it.id)
+                    }.sortedByDescending { it.hits }
+                    uiState = uiState.copy(
+                        filteredStations = result,
+                        error = null,
+                        isLoading = false
+                    )
+                } else {
+                    uiState = uiState.copy(
+                        filteredStations = emptyList(),
+                        error = null,
+                        isLoading = false
+                    )
+                }
+            }
+        }
+    }
+
     fun onFirstStationSelect(station: TrainStation) {
         viewModelScope.launch {
             uiState = uiState.copy(
@@ -123,6 +153,7 @@ data class StationsUIState(
     val isLoading: Boolean = true,
     val error: String? = null,
     var trainStations: List<TrainStation>? = listOf(),
+    var filteredStations: List<TrainStation>? = listOf(),
     var keywords: List<StationKeyword>? = listOf(),
     var firstStation: TrainStation? = null,
     var secondStation: TrainStation? = null,

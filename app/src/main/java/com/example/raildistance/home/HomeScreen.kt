@@ -114,24 +114,30 @@ fun HomeScreenContent(
                     }
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXXL))
                     AutoCompleteSearchBar(
-                        keywords = uiState.keywords ?: emptyList(),
-                        stations = uiState.trainStations ?: emptyList(),
+                        modifier = Modifier.fillMaxWidth(),
+                        items = uiState.filteredStations ?: emptyList(),
                         leadingIcon = R.drawable.ic_start_destination,
                         trailingIcon = R.drawable.ic_close,
                         placeholder = stringResource(id = R.string.enter_station_name),
                         onItemClick = { trainStation ->
                             viewModel.onFirstStationSelect(trainStation)
+                        },
+                        onValueChange = { input ->
+                            viewModel.filterStations(input = input)
                         }
                     )
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
                     AutoCompleteSearchBar(
-                        keywords = uiState.keywords ?: emptyList(),
-                        stations = uiState.trainStations ?: emptyList(),
+                        modifier = Modifier.fillMaxWidth(),
+                        items = uiState.filteredStations ?: emptyList(),
                         leadingIcon = R.drawable.ic_end_destination,
                         trailingIcon = R.drawable.ic_close,
                         placeholder = stringResource(id = R.string.enter_station_name),
                         onItemClick = { trainStation ->
                             viewModel.onSecondStationSelect(trainStation)
+                        },
+                        onValueChange = { input ->
+                            viewModel.filterStations(input = input)
                         }
                     )
                     Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingSeparator))
