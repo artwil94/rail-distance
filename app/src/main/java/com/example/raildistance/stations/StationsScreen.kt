@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -111,7 +112,6 @@ fun StationsScreenContent(
                         text = stringResource(id = R.string.close).uppercase(),
                         style = KoTheme.kOTypography.close,
                         modifier = Modifier
-                            .weight(1f)
                             .clickable {
                                 onCLoseCLick.invoke()
                             }
@@ -127,6 +127,7 @@ fun StationsScreenContent(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
+                        .windowInsetsPadding(WindowInsets.ime)
                 ) {
                     item {
                         Text(
