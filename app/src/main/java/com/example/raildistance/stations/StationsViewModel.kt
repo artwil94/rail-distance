@@ -18,7 +18,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class /**/ StationsViewModel @Inject constructor(
+class StationsViewModel @Inject constructor(
     private val repository: TrainStationsRepository,
 ) : ViewModel() {
 
@@ -148,13 +148,6 @@ class /**/ StationsViewModel @Inject constructor(
             )
         }
     }
-
-//    fun refreshTrainStations() {
-//        viewModelScope.launch {
-//            repository.refreshTrainStations()
-//        }
-//    }
-
 }
 
 data class StationsUIState(
