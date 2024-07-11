@@ -45,6 +45,7 @@ fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = 
     LaunchedEffect(key1 = Unit) {
         viewModel.getTrainStations()
         viewModel.getStationKeywords()
+//        viewModel.refreshTrainStations()
     }
     LaunchedEffect(key1 = uiState.firstStation, key2 = uiState.secondStation) {
         viewModel.resetDistanceCalculator()

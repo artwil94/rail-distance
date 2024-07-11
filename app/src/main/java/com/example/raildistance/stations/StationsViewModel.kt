@@ -84,7 +84,7 @@ class /**/ StationsViewModel @Inject constructor(
                 val stations = uiState.trainStations!!
                 if (input.length >= Constants.MIN_INPUT_LENGTH_TO_AUTOCOMPLETE) {
                     val filteredKeywords = keywords.filter {
-                        normalizePolishMarks(it.keyword).contains(input.lowercase())
+                        normalizePolishMarks(it.keyword!!).contains(input.lowercase())
                     }
                     val matchingStationIDs = filteredKeywords.map { it.stationId }.toSet()
                     val result = stations.filter {
@@ -148,6 +148,13 @@ class /**/ StationsViewModel @Inject constructor(
             )
         }
     }
+
+//    fun refreshTrainStations() {
+//        viewModelScope.launch {
+//            repository.refreshTrainStations()
+//        }
+//    }
+
 }
 
 data class StationsUIState(
