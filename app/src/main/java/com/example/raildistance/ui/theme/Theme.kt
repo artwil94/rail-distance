@@ -113,6 +113,13 @@ data class KoTypography(
         color = Color(0xFF696878),
         fontFamily = KoTheme.fonts.robotoLight
     ),
+    val clearCTA: TextStyle = TextStyle(
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        fontWeight = FontWeight(700),
+        color = Color(0xFF333333),
+        fontFamily = KoTheme.fonts.robotoBold
+    ),
     val toolbar: TextStyle = TextStyle(
         fontSize = 24.sp,
         lineHeight = 28.sp,
@@ -179,6 +186,29 @@ data class KoTypography(
         color = Color(0xFF333333),
         textAlign = TextAlign.Center,
     ),
+    val searchBarPlaceHolder: TextStyle = TextStyle(
+        fontSize = 16.sp,
+        fontFamily = KoTheme.fonts.robotoLight,
+        fontWeight = FontWeight(300),
+        color = Color(0xFF6B687A),
+        platformStyle = PlatformTextStyle(
+            includeFontPadding = false
+        ),
+    ),
+    val distance: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        lineHeight = 24.sp,
+        fontFamily = KoTheme.fonts.freigeistMedium,
+        fontWeight = FontWeight(550),
+        color = Color(0xFF333333),
+    ),
+    val close: TextStyle = TextStyle(
+        fontSize = 24.sp,
+        lineHeight = 24.sp,
+        fontFamily = KoTheme.fonts.freigeistMedium,
+        fontWeight = FontWeight(550),
+        color = Color.White,
+    ),
 )
 
 data class Fonts(
@@ -206,9 +236,11 @@ data class KoDimensions(
     val paddingXL: Dp = 24.dp,
     val paddingXXL: Dp = 30.dp,
     val paddingSeparator: Dp = 50.dp,
+    val inputFieldHeight: Dp = 50.dp,
     val screenHeaderHeight: Dp = 120.dp,
     val tabsHeight: Dp = 42.dp,
     val icon: Dp = 24.dp,
+    val searchBarCloseIcon: Dp = 20.dp,
 )
 
 data class KoColors(
