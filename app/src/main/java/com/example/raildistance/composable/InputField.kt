@@ -34,9 +34,9 @@ fun SearchInputField(
         modifier = Modifier
             .then(modifier)
             .fillMaxWidth()
-            .clip(shape = KoTheme.kOShapes.inputField)
-            .border(width = 0.dp, color = Color.Black, shape = KoTheme.kOShapes.inputField)
-            .height(KoTheme.kODimensions.inputFieldHeight)
+            .clip(shape = KoTheme.koShapes.inputField)
+            .border(width = 0.dp, color = Color.Black, shape = KoTheme.koShapes.inputField)
+            .height(KoTheme.koDimensions.inputFieldHeight)
             .clickable {
                 if (inputFieldType == InputFieldType.Disabled) {
                     onClick.invoke()
@@ -44,7 +44,7 @@ fun SearchInputField(
             },
         value = text,
         onValueChange = onValueChange,
-        textStyle = KoTheme.kOTypography.inputField,
+        textStyle = KoTheme.koTypography.inputField,
         colors = TextFieldDefaults.colors(
             disabledIndicatorColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
@@ -61,8 +61,8 @@ fun SearchInputField(
                 Icon(
                     painter = painterResource(id = leadingIcon),
                     contentDescription = null,
-                    tint = KoTheme.kOColors.textStandard,
-                    modifier = Modifier.size(KoTheme.kODimensions.icon)
+                    tint = KoTheme.koColors.textStandard,
+                    modifier = Modifier.size(KoTheme.koDimensions.icon)
                 )
             }
         },
@@ -71,13 +71,13 @@ fun SearchInputField(
                 Icon(
                     painter = painterResource(id = trailingIcon),
                     contentDescription = null,
-                    tint = KoTheme.kOColors.textStandard
+                    tint = KoTheme.koColors.textStandard
                 )
             }
         },
         placeholder = {
             placeHolder?.let {
-                Text(text = it, style = KoTheme.kOTypography.inputField)
+                Text(text = it, style = KoTheme.koTypography.inputField)
             }
         }
     )

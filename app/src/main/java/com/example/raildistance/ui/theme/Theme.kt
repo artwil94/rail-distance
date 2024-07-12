@@ -83,15 +83,15 @@ fun RailDistanceTheme(
 }
 
 object KoTheme {
-    val kOTypography: KoTypography
+    val koTypography: KoTypography
         @Composable get() = KoTypography()
 
-    val kOShapes: KoShapes
+    val koShapes: KoShapes
         @Composable get() = KoShapes()
     val fonts: Fonts = Fonts()
-    val kODimensions: KoDimensions
+    val koDimensions: KoDimensions
         @Composable get() = KoDimensions()
-    val kOColors: KoColors
+    val koColors: KoColors
         @Composable get() = KoColors()
 
 }

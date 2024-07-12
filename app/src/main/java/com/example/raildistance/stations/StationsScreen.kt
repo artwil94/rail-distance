@@ -83,23 +83,23 @@ fun StationsScreenContent(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(KoTheme.kOColors.screenHeader)
+                .background(KoTheme.koColors.screenHeader)
         ) {
             Column(
                 modifier = Modifier
                     .padding(
-                        start = KoTheme.kODimensions.padding,
-                        end = KoTheme.kODimensions.padding,
-                        top = KoTheme.kODimensions.paddingXL
+                        start = KoTheme.koDimensions.padding,
+                        end = KoTheme.koDimensions.padding,
+                        top = KoTheme.koDimensions.paddingXL
                     )
                     .systemBarsPadding(),
             ) {
                 Text(
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     text = stringResource(id = R.string.stations).uppercase(),
-                    style = KoTheme.kOTypography.brandTitle
+                    style = KoTheme.koTypography.brandTitle
                 )
-                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
+                Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingXL))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
@@ -117,7 +117,7 @@ fun StationsScreenContent(
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
                         text = stringResource(id = R.string.close).uppercase(),
-                        style = KoTheme.kOTypography.close,
+                        style = KoTheme.koTypography.close,
                         modifier = Modifier
                             .clickable {
                                 onCLoseCLick.invoke()
@@ -125,7 +125,7 @@ fun StationsScreenContent(
                         textDecoration = TextDecoration.Underline
                     )
                 }
-                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
+                Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingXL))
             }
         }
         if (uiState.isLoading) {
@@ -140,13 +140,13 @@ fun StationsScreenContent(
                     item {
                         Text(
                             modifier = Modifier.padding(
-                                start = KoTheme.kODimensions.paddingL,
-                                end = KoTheme.kODimensions.paddingL,
-                                top = KoTheme.kODimensions.padding,
-                                bottom = KoTheme.kODimensions.padding
+                                start = KoTheme.koDimensions.paddingL,
+                                end = KoTheme.koDimensions.paddingL,
+                                top = KoTheme.koDimensions.padding,
+                                bottom = KoTheme.koDimensions.padding
                             ),
                             text = stringResource(id = R.string.results) + ":",
-                            style = KoTheme.kOTypography.stationName
+                            style = KoTheme.koTypography.stationName
                         )
                     }
                     uiState.filteredStations?.let { stations ->

@@ -10,34 +10,18 @@ class CharacterConversionTest {
     @Test
     fun testConvertPolishCharacters() {
         // Given
-        val original = "Łódź"
-        val expected = "Lodz"
+        val original = ("lódź")
+        val expected = ("lodz")
+
+        val originalCapitalize = ("Gdańsk")
+        val expectedCapitalize = ("gdansk")
 
         // When
-        val actual = convertPolishCharacters(original)
+        val actual = normalizePolishCharacters(original)
+        val actualCapitalize = normalizePolishCharacters(originalCapitalize)
 
         // Then
         assertEquals(expected, actual)
-    }
-
-    private fun convertPolishCharacters(input: String): String {
-        return input.replace("Ł", "L")
-            .replace("ł", "l")
-            .replace("ó", "o")
-            .replace("Ó", "O")
-            .replace("ź", "z")
-            .replace("Ź", "Z")
-            .replace("ż", "z")
-            .replace("Ż", "Z")
-            .replace("ć", "c")
-            .replace("Ć", "C")
-            .replace("ń", "n")
-            .replace("Ń", "N")
-            .replace("ą", "a")
-            .replace("Ą", "A")
-            .replace("ę", "e")
-            .replace("Ę", "E")
-            .replace("ś", "s")
-            .replace("Ś", "S")
+        assertEquals(expectedCapitalize,actualCapitalize)
     }
 }
