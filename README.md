@@ -41,3 +41,8 @@ To set up the project locally, follow these steps:
 - **Room**: For local database storage.
 - **Mockito**: For mocking dependencies in unit tests.
 - **Timber**: For logging.
+
+## UI/UX
+
+<img width="270" alt="Screenshot 2024-07-12 at 11 31 41" src="https://github.com/user-attachments/assets/4d3ee1ff-ad96-441e-b161-9ade995b6704">
+
