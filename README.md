@@ -13,8 +13,8 @@ Rail Distance is an Android application that allows users to find and calculate 
 
 ## UI/UX
 <div style="display: flex; justify-content: space-around;">
-    <img src="https://github.com/user-attachments/assets/4d3ee1ff-ad96-441e-b161-9ade995b6704" alt="Screenshot 1" width="270"/>
-    <img src="https://github.com/user-attachments/assets/fdbd1602-1255-46a4-8be4-19d5d7bf972f" alt="Screenshot 2" width="270"/>
+   <img width="270" alt="Screenshot 2024-07-12 at 11 31 41" src="https://github.com/user-attachments/assets/4d3ee1ff-ad96-441e-b161-9ade995b6704">
+<img width="269" alt="Screenshot 2024-07-12 at 11 32 04" src="https://github.com/user-attachments/assets/fdbd1602-1255-46a4-8be4-19d5d7bf972f">
 </div>
 
 ## Installation
