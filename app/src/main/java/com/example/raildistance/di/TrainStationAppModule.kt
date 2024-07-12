@@ -1,11 +1,15 @@
 package com.example.raildistance.di
 
+import android.content.Context
+import androidx.room.Room
+import com.example.raildistance.data.local.LocalDataBase
 import com.example.raildistance.data.remote.TrainStationsApi
 import com.example.raildistance.domain.repository.TrainStationsRepository
 import com.example.raildistance.domain.repository.TrainStationsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -39,7 +43,20 @@ object TrainStationAppModule {
 
     @Provides
     @Singleton
-    fun provideTrainStationsRepository(trainStationsApi: TrainStationsApi): TrainStationsRepository {
-        return TrainStationsRepositoryImpl(trainStationsApi)
+    fun provideTrainStationsRepository(
+        trainStationsApi: TrainStationsApi,
+        dataBase: LocalDataBase
+    ): TrainStationsRepository {
+        return TrainStationsRepositoryImpl(trainStationsApi, dataBase)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalDataBase(@ApplicationContext context: Context): LocalDataBase {
+        return Room.databaseBuilder(
+            context = context,
+            LocalDataBase::class.java,
+            "station_data_base"
+        ).build()
     }
 }

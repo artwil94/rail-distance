@@ -11,13 +11,14 @@ import com.example.raildistance.domain.model.TrainStation
 import com.example.raildistance.domain.repository.TrainStationsRepository
 import com.example.raildistance.util.Response
 import com.example.raildistance.utils.Constants
+import com.example.raildistance.utils.normalizePolishMarks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class /**/ StationsViewModel @Inject constructor(
+class StationsViewModel @Inject constructor(
     private val repository: TrainStationsRepository,
 ) : ViewModel() {
 
@@ -83,7 +84,7 @@ class /**/ StationsViewModel @Inject constructor(
                 val stations = uiState.trainStations!!
                 if (input.length >= Constants.MIN_INPUT_LENGTH_TO_AUTOCOMPLETE) {
                     val filteredKeywords = keywords.filter {
-                        it.keyword.lowercase().contains(input.lowercase())
+                        normalizePolishMarks(it.keyword!!).contains(input.lowercase())
                     }
                     val matchingStationIDs = filteredKeywords.map { it.stationId }.toSet()
                     val result = stations.filter {

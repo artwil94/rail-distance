@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
@@ -24,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.raildistance.R
@@ -90,8 +92,14 @@ fun StationsScreenContent(
                         end = KoTheme.kODimensions.padding,
                         top = KoTheme.kODimensions.paddingXL
                     )
-                    .systemBarsPadding()
+                    .systemBarsPadding(),
             ) {
+                Text(
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
+                    text = stringResource(id = R.string.stations).uppercase(),
+                    style = KoTheme.kOTypography.brandTitle
+                )
+                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
@@ -111,10 +119,10 @@ fun StationsScreenContent(
                         text = stringResource(id = R.string.close).uppercase(),
                         style = KoTheme.kOTypography.close,
                         modifier = Modifier
-                            .weight(1f)
                             .clickable {
                                 onCLoseCLick.invoke()
-                            }
+                            },
+                        textDecoration = TextDecoration.Underline
                     )
                 }
                 Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
@@ -127,6 +135,7 @@ fun StationsScreenContent(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
+                        .windowInsetsPadding(WindowInsets.ime)
                 ) {
                     item {
                         Text(
