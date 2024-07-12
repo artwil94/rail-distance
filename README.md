@@ -7,7 +7,7 @@ Rail Distance is an Android application that allows users to find and calculate 
 ## Features
 
 - **Fetch Train Stations**: Retrieves a list of train stations from a remote API.
-- **Filter Stations**: Allows users to filter the list of stations based on keywords.
+- **Search Stations**: Allows users to search stations based on keywords.
 - **Character Conversion**: Converts Polish characters in station names to their standard equivalents.
 - **Distance Calculation**: Calculates the distance between two selected train stations and displays the result.
 
