@@ -82,7 +82,7 @@ fun AutoCompleteSearchBar(
             modifier = Modifier
                 .then(modifier)
                 .height(heightTextFields)
-                .clip(shape = KoTheme.kOShapes.inputField)
+                .clip(shape = KoTheme.koShapes.inputField)
                 .onGloballyPositioned { coordinates ->
                     textFieldSize = coordinates.size.toSize()
                 }
@@ -100,7 +100,7 @@ fun AutoCompleteSearchBar(
                 if (placeholder != null) {
                     Text(
                         text = placeholder,
-                        style = KoTheme.kOTypography.searchBarPlaceHolder
+                        style = KoTheme.koTypography.searchBarPlaceHolder
                     )
                 }
             },
@@ -112,7 +112,7 @@ fun AutoCompleteSearchBar(
                 focusedContainerColor = Color.White,
                 disabledContainerColor = Color.White
             ),
-            textStyle = KoTheme.kOTypography.inputField,
+            textStyle = KoTheme.koTypography.inputField,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Done
@@ -128,9 +128,9 @@ fun AutoCompleteSearchBar(
                         Icon(
                             painter = painterResource(id = trailingIcon),
                             contentDescription = null,
-                            tint = KoTheme.kOColors.textStandard,
+                            tint = KoTheme.koColors.textStandard,
                             modifier = Modifier
-                                .size(KoTheme.kODimensions.searchBarCloseIcon)
+                                .size(KoTheme.koDimensions.searchBarCloseIcon)
                                 .clickable {
                                     input = ""
                                 }
@@ -143,8 +143,8 @@ fun AutoCompleteSearchBar(
                     Icon(
                         painter = painterResource(id = leadingIcon),
                         contentDescription = null,
-                        tint = KoTheme.kOColors.textStandard,
-                        modifier = Modifier.size(KoTheme.kODimensions.icon)
+                        tint = KoTheme.koColors.textStandard,
+                        modifier = Modifier.size(KoTheme.koDimensions.icon)
                     )
                 }
             }
