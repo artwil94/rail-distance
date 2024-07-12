@@ -25,7 +25,7 @@ To set up the project locally, follow these steps:
 
 3. **Sync the project**: Ensure that all Gradle dependencies are downloaded and the project is synced successfully.
 
-4. **Run the app**: Connect an Android device or start an emulator and run the app from Android Studio. (Application works offline, but requires download data from API at least once, so network connection needed)
+4. **Run the app**: Connect an Android device or start an emulator and run the app from Android Studio. (The application works offline, but requires downloading data from API at least once to save it locally, so a network connection is needed)
 
 ## Usage
 
