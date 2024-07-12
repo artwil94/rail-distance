@@ -11,6 +11,12 @@ Rail Distance is an Android application that allows users to find and calculate 
 - **Character Conversion**: Converts Polish characters in station names to their standard equivalents.
 - **Distance Calculation**: Calculates the distance between two selected train stations and displays the result.
 
+## UI/UX
+<div style="display: flex; justify-content: space-around;">
+    <img src="https://github.com/user-attachments/assets/4d3ee1ff-ad96-441e-b161-9ade995b6704" alt="Screenshot 1" width="270"/>
+    <img src="https://github.com/user-attachments/assets/fdbd1602-1255-46a4-8be4-19d5d7bf972f" alt="Screenshot 2" width="270"/>
+</div>
+
 ## Installation
 
 To set up the project locally, follow these steps:
@@ -41,8 +47,3 @@ To set up the project locally, follow these steps:
 - **Room**: For local database storage.
 - **Mockito**: For mocking dependencies in unit tests.
 - **Timber**: For logging.
-
-## UI/UX
-
-<img width="270" alt="Screenshot 2024-07-12 at 11 31 41" src="https://github.com/user-attachments/assets/4d3ee1ff-ad96-441e-b161-9ade995b6704">
-
