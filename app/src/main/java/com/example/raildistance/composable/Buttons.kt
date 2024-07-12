@@ -23,7 +23,7 @@ import com.example.raildistance.ui.theme.KoTheme
 fun ActionButton(
     modifier: Modifier = Modifier,
     text: String,
-    color: Color = KoTheme.kOColors.actionButton,
+    color: Color = KoTheme.koColors.actionButton,
     inverted: Boolean = false,
     @DrawableRes leadingIcon: Int? = null,
     @DrawableRes trailingIcon: Int? = null,
@@ -47,20 +47,20 @@ fun ActionButton(
                 Icon(
                     painter = painterResource(id = leadingIcon),
                     contentDescription = null,
-                    tint = if (inverted) Color.White else KoTheme.kOColors.textStandard
+                    tint = if (inverted) Color.White else KoTheme.koColors.textStandard
                 )
-                Spacer(modifier = Modifier.width(KoTheme.kODimensions.paddingXs))
+                Spacer(modifier = Modifier.width(KoTheme.koDimensions.paddingXs))
             }
             Text(
                 text = text.uppercase(),
-                style = if (inverted) KoTheme.kOTypography.actionButtonWhite else KoTheme.kOTypography.actionButton
+                style = if (inverted) KoTheme.koTypography.actionButtonWhite else KoTheme.koTypography.actionButton
             )
             trailingIcon?.let {
-                Spacer(modifier = Modifier.width(KoTheme.kODimensions.padding))
+                Spacer(modifier = Modifier.width(KoTheme.koDimensions.padding))
                 Icon(
                     painter = painterResource(id = trailingIcon),
                     contentDescription = text,
-                    tint = if (inverted) Color.White else KoTheme.kOColors.textStandard
+                    tint = if (inverted) Color.White else KoTheme.koColors.textStandard
                 )
             }
         }

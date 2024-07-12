@@ -8,7 +8,6 @@ import com.example.raildistance.domain.model.TrainStation
 import com.example.raildistance.domain.model.toStationKeyword
 import com.example.raildistance.domain.model.toTrainStation
 import com.example.raildistance.util.Response
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -25,7 +24,6 @@ class TrainStationsRepositoryImpl @Inject constructor(
             if (cacheInfo == null || isFetchNeeded(cacheInfo.lastFetchTime, currentTime)) {
                 val trainStations =
                     stationsApi.getStations().map { it.toTrainStation() }.requireNoNulls()
-                Timber.d("ARTURTW local $trainStations")
                 dataBase.trainStationDao.deleteAll()
                 dataBase.trainStationDao.insertAll(trainStations = trainStations)
                 dataBase.cacheInfoDao.insert(CacheInfo(lastFetchTime = currentTime))

@@ -45,7 +45,6 @@ fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = 
     LaunchedEffect(key1 = Unit) {
         viewModel.getTrainStations()
         viewModel.getStationKeywords()
-//        viewModel.refreshTrainStations()
     }
     LaunchedEffect(key1 = uiState.firstStation, key2 = uiState.secondStation) {
         viewModel.resetDistanceCalculator()
@@ -57,7 +56,7 @@ fun HomeScreen(navController: NavHostController, viewModel: StationsViewModel = 
             .windowInsetsPadding(WindowInsets.navigationBars),
         bottomBar = { BottomBar(navController = navController) }
     ) { innerPadding ->
-        ChangeSystemBarColor(statusBarColor = KoTheme.kOColors.screenHeader)
+        ChangeSystemBarColor(statusBarColor = KoTheme.koColors.screenHeader)
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -93,10 +92,10 @@ fun HomeScreenContent(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(color = KoTheme.kOColors.screenHeader)
+                    .background(color = KoTheme.koColors.screenHeader)
             ) {
                 Column(
-                    modifier = Modifier.padding(KoTheme.kODimensions.padding),
+                    modifier = Modifier.padding(KoTheme.koDimensions.padding),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Row(
@@ -105,7 +104,7 @@ fun HomeScreenContent(
                     ) {
                         Text(
                             text = stringResource(id = R.string.koleo).uppercase(),
-                            style = KoTheme.kOTypography.brandTitle
+                            style = KoTheme.koTypography.brandTitle
                         )
                         Icon(
                             painter = painterResource(id = R.drawable.ic_train),
@@ -113,7 +112,7 @@ fun HomeScreenContent(
                             tint = Color.White
                         )
                     }
-                    Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXXL))
+                    Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingXXL))
                     AutoCompleteSearchBar(
                         modifier = Modifier.fillMaxWidth(),
                         items = uiState.filteredStations ?: emptyList(),
@@ -127,7 +126,7 @@ fun HomeScreenContent(
                             viewModel.filterStations(input = input)
                         }
                     )
-                    Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXL))
+                    Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingXL))
                     AutoCompleteSearchBar(
                         modifier = Modifier.fillMaxWidth(),
                         items = uiState.filteredStations ?: emptyList(),
@@ -141,7 +140,7 @@ fun HomeScreenContent(
                             viewModel.filterStations(input = input)
                         }
                     )
-                    Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingSeparator))
+                    Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingSeparator))
                     ActionButton(
                         text = "Calculate distance",
                         onClick = {
@@ -151,41 +150,41 @@ fun HomeScreenContent(
                         inverted = true,
                         trailingIcon = R.drawable.ic_distance_between
                     )
-                    Spacer(modifier = Modifier.height(KoTheme.kODimensions.padding))
+                    Spacer(modifier = Modifier.height(KoTheme.koDimensions.padding))
                 }
             }
             if (uiState.distance.isNullOrBlank().not()) {
-                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingSeparator))
+                Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingSeparator))
                 Text(
                     modifier = Modifier
                         .align(Alignment.End)
-                        .padding(end = KoTheme.kODimensions.padding)
+                        .padding(end = KoTheme.koDimensions.padding)
                         .clickable {
                             viewModel.resetDistanceCalculator()
                         },
                     text = stringResource(id = R.string.clear),
-                    style = KoTheme.kOTypography.clearCTA,
+                    style = KoTheme.koTypography.clearCTA,
                     textDecoration = TextDecoration.Underline
                 )
                 Text(
                     text = stringResource(id = R.string.distance),
-                    style = KoTheme.kOTypography.distance
+                    style = KoTheme.koTypography.distance
                 )
-                Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingS))
+                Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingS))
                 Text(
                     text = stringResource(id = R.string.km, uiState.distance.toString()),
-                    style = KoTheme.kOTypography.stationName
+                    style = KoTheme.koTypography.stationName
                 )
                 Row(
                     modifier = Modifier
-                        .padding(KoTheme.kODimensions.padding)
+                        .padding(KoTheme.koDimensions.padding)
                         .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         modifier = Modifier.weight(1f),
                         text = uiState.firstStation?.name ?: "",
-                        style = KoTheme.kOTypography.stationName
+                        style = KoTheme.koTypography.stationName
                     )
                     Icon(
                         modifier = Modifier.weight(1f),
@@ -198,7 +197,7 @@ fun HomeScreenContent(
                     Text(
                         modifier = Modifier.weight(1f),
                         text = uiState.secondStation?.name ?: "",
-                        style = KoTheme.kOTypography.stationName
+                        style = KoTheme.koTypography.stationName
                     )
                 }
             }

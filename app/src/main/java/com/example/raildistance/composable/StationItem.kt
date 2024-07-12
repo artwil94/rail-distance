@@ -29,10 +29,10 @@ fun StationItem(station: TrainStation, onClick: (TrainStation) -> Unit = {}) {
         modifier = Modifier
             .clickable { onClick.invoke(station) }
             .padding(
-                start = KoTheme.kODimensions.paddingS,
-                end = KoTheme.kODimensions.paddingS,
-                top = KoTheme.kODimensions.paddingL,
-                bottom = KoTheme.kODimensions.paddingL
+                start = KoTheme.koDimensions.paddingS,
+                end = KoTheme.koDimensions.paddingS,
+                top = KoTheme.koDimensions.paddingL,
+                bottom = KoTheme.koDimensions.paddingL
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -42,19 +42,19 @@ fun StationItem(station: TrainStation, onClick: (TrainStation) -> Unit = {}) {
             contentDescription = stringResource(id = R.string.station),
             tint = Color.Unspecified
         )
-        Spacer(modifier = Modifier.width(KoTheme.kODimensions.padding))
+        Spacer(modifier = Modifier.width(KoTheme.koDimensions.padding))
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = station.name,
-                style = KoTheme.kOTypography.stationName
+                style = KoTheme.koTypography.stationName
             )
-            Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingXs))
+            Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingXs))
             Text(
                 text = "${station.city}, ${station.region}, ${station.country}",
-                style = KoTheme.kOTypography.stationDescription
+                style = KoTheme.koTypography.stationDescription
             )
         }
-        Spacer(modifier = Modifier.height(KoTheme.kODimensions.paddingS))
+        Spacer(modifier = Modifier.height(KoTheme.koDimensions.paddingS))
         Icon(
             modifier = Modifier
                 .wrapContentSize(),

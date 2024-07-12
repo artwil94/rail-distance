@@ -75,11 +75,11 @@ fun RowScope.AddItem(
     } == true
     BottomNavigationItem(
         modifier = Modifier
-            .padding(top = KoTheme.kODimensions.paddingXs)
-            .clip(KoTheme.kOShapes.buttonDefaultShape)
+            .padding(top = KoTheme.koDimensions.paddingXs)
+            .clip(KoTheme.koShapes.buttonDefaultShape)
             .background(
-                color = if (selected) KoTheme.kOColors.screenHeader else Color.White,
-                shape = if (selected) KoTheme.kOShapes.buttonDefaultShape else RoundedCornerShape(0.dp)
+                color = if (selected) KoTheme.koColors.screenHeader else Color.White,
+                shape = if (selected) KoTheme.koShapes.buttonDefaultShape else RoundedCornerShape(0.dp)
             ),
         selected = selected,
         onClick = { navController.navigate(screen.route) },
@@ -88,7 +88,7 @@ fun RowScope.AddItem(
             if (icon != null) {
                 Icon(
                     modifier = Modifier
-                        .size(KoTheme.kODimensions.icon)
+                        .size(KoTheme.koDimensions.icon)
                         .padding(),
                     painter = painterResource(id = screen.icon),
                     contentDescription = stringResource(id = screen.contentDescription!!),
@@ -99,11 +99,11 @@ fun RowScope.AddItem(
         label = {
             Text(
                 text = screen.title?.let { stringResource(id = it) } ?: "",
-                style = if (selected) KoTheme.kOTypography.bottomBarLabelSelect
-                else KoTheme.kOTypography.bottomBarLabelUnSelect
+                style = if (selected) KoTheme.koTypography.bottomBarLabelSelect
+                else KoTheme.koTypography.bottomBarLabelUnSelect
             )
         },
-        selectedContentColor = KoTheme.kOColors.bottomBar,
+        selectedContentColor = KoTheme.koColors.bottomBar,
         unselectedContentColor = Color.White
     )
 }
