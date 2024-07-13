@@ -35,12 +35,13 @@ To set up the project locally, follow these steps:
 
 ## Technology Stack
 
-- **Kotlin**: Programming language used for the application.
+- **Kotlin**: Programming language used for the application, including Kotlin Coroutines, Kotlin Flow for asynchronous programming
 - **Android Architecture Components**: MVVM pattern
-- **Retrofit**: For making API calls.
-- **Room**: For local database storage.
-- **Mockito**: For mocking dependencies in unit tests.
-- **Timber**: For logging.
+- **Retrofit**: For making API calls
+- **Room**: For local database storage
+- **Hilt Dagger**: Used for dependency injection
+- **Mockito**: For mocking dependencies in unit tests
+- **Timber**: For logging
 
  ## UI/UX
 
