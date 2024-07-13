@@ -35,8 +35,9 @@ To set up the project locally, follow these steps:
 
 ## Technology Stack
 
-- **Kotlin**: Programming language used for the application, including Kotlin Coroutines, Kotlin Flow for asynchronous programming
+- **Kotlin**: Programming language used for the application, including Kotlin Coroutines and Kotlin Flow for asynchronous programming
 - **Android Architecture Components**: MVVM pattern
+- **Jetpack Compose**: Used for build UI
 - **Retrofit**: For making API calls
 - **Room**: For local database storage
 - **Hilt Dagger**: Used for dependency injection
