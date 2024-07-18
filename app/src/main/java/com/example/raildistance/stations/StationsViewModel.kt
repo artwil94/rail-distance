@@ -11,10 +11,10 @@ import com.example.raildistance.domain.repository.TrainStationsRepository
 import com.example.raildistance.util.Response
 import com.example.raildistance.utils.Constants
 import com.example.raildistance.utils.calculateDistanceInKilometers
+import com.example.raildistance.utils.distanceConverter
 import com.example.raildistance.utils.normalizePolishCharacters
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,7 +31,6 @@ class StationsViewModel @Inject constructor(
                 isLoading = true
             )
             val result = repository.getTrainStations()
-            Timber.d("ARTUR ${result.message}")
             when (result) {
                 is Response.Success -> {
                     uiState = uiState.copy(
@@ -132,11 +131,12 @@ class StationsViewModel @Inject constructor(
 
     fun calculateDistance(firstStation: TrainStation, secondStation: TrainStation) {
         viewModelScope.launch {
+            val distance = calculateDistanceInKilometers(
+                firstStation = firstStation,
+                secondStation = secondStation
+            )
             uiState = uiState.copy(
-                distance = calculateDistanceInKilometers(
-                    firstStation = firstStation,
-                    secondStation = secondStation
-                )
+                distance = distanceConverter(distance)
             )
         }
     }

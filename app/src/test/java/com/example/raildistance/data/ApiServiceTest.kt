@@ -2,21 +2,21 @@ package com.example.raildistance.data
 
 import com.example.raildistance.data.remote.StationDto
 import com.example.raildistance.data.remote.TrainStationsApi
+import io.mockk.coEvery
+import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.fail
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
 
 @RunWith(JUnit4::class)
 class ApiServiceTest {
-    private val apiService = mock(TrainStationsApi::class.java)
+    private val apiService = mockk<TrainStationsApi>()
 
     @Test
-    fun testFetchTrainStationsSuccess() = runBlocking {
+    fun `fetchTrainStations returns expected stations on success`() = runBlocking {
         // Given
         val expectedStations = listOf(
             StationDto(
@@ -26,7 +26,7 @@ class ApiServiceTest {
                 longitude = 21.05374,
             )
         )
-        `when`(apiService.getStations()).thenReturn(expectedStations)
+        coEvery { apiService.getStations() } returns expectedStations
 
         // When
         val actualStations = apiService.getStations()
@@ -36,9 +36,9 @@ class ApiServiceTest {
     }
 
     @Test
-    fun testFetchTrainStationsFailure() = runBlocking {
+    fun `fetchTrainStations throws exception on failure`() = runBlocking {
         // Given
-        `when`(apiService.getStations()).thenThrow(RuntimeException("API error"))
+        coEvery { apiService.getStations() } throws RuntimeException("API error")
 
         // When
         try {
