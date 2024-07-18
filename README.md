@@ -41,7 +41,7 @@ To set up the project locally, follow these steps:
 - **Retrofit**: For making API calls
 - **Room**: For local database storage
 - **Hilt Dagger**: Used for dependency injection
-- **Mockito**: For mocking dependencies in unit tests
+- **MockK**: For mocking dependencies in unit tests
 - **Timber**: For logging
 
  ## UI/UX
