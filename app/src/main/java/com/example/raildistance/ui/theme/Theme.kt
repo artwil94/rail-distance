@@ -224,8 +224,7 @@ data class KoShapes(
     val inputField: Shape = RoundedCornerShape(10.dp),
     val stationItem: Shape = RoundedCornerShape(10.dp),
     val buttonDefaultShape: Shape = RoundedCornerShape(size = 1000.dp),
-
-    )
+)
 
 data class KoDimensions(
     val paddingXs: Dp = 4.dp,
