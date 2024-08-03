@@ -16,20 +16,14 @@ import com.example.raildistance.stations.StationsScreen
 fun SetupNavGraph(
     navController: NavHostController
 ) {
-    NavHost(navController = navController, startDestination = Screen.Home.route) {
-        composable(
-            route = Screen.Home.route
-        ) {
+    NavHost(navController = navController, startDestination = Screen.Home) {
+        composable<Screen.Home>{
             HomeScreen(navController = navController)
         }
-        composable(
-            route = Screen.Account.route,
-        ) {
+        composable<Screen.Account> {
             AccountScreen(navController = navController)
         }
-        composable(
-            route = Screen.Stations.route,
-        ) {
+        composable<Screen.Stations> {
             StationsScreen(navController = navController)
         }
     }
